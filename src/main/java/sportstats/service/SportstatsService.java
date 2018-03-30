@@ -5,7 +5,6 @@
  */
 package sportstats.service;
 
-import sportstats.db.DbConn;
 import sportstats.domain.broker.BrokerFactory;
 
 /**

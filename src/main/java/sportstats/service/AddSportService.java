@@ -5,11 +5,7 @@
  */
 package sportstats.service;
 
-import sportstats.db.DbConn;
 import sportstats.domain.Sport;
-import sportstats.service.BaseService;
-import sportstats.service.SportstatsServiceException;
-//import sportstats.domain.dao.SportDao;
 
 /**
  *
@@ -30,9 +26,6 @@ public class AddSportService extends BaseService<Sport> {
     public Sport execute() {
         Sport sport = getBrokerFactory().getSportBroker().create();
         sport.setName(sportName);
-        if (sport == null) {
-            throw new SportstatsServiceException("No sport with given ID");
-        }
         
         sport.save();
         return sport;

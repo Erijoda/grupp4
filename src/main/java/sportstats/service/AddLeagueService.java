@@ -5,22 +5,16 @@
  */
 package sportstats.service;
 
-import sportstats.db.DbConn;
 import sportstats.domain.Sport;
 import sportstats.domain.League;
-import sportstats.domain.broker.BrokerFactory;
 
 /**
  *
  * @author Rebecca
  */
-public class AddLeagueService {
+public class AddLeagueService extends BaseService<League> {
     private final String name;
     private final Long sportId;
-    private DbConn conn;
-    private BrokerFactory brokerFactory;
-    
-    
     
     public AddLeagueService(String name, Long sportId) {
         if (name == null) {
@@ -33,22 +27,19 @@ public class AddLeagueService {
         this.sportId = sportId;
     }
     
-    public void init(DbConn conn, BrokerFactory brokerFactory) {
-        this.conn = conn;
-        this.brokerFactory = brokerFactory;
-    }
-    
+    @Override
     public League execute() {
-        conn.open();
-        League league = brokerFactory.getLeagueBroker().create();
+        League league = getBrokerFactory().getLeagueBroker().create();
         league.setName(name);
-        Sport sport = brokerFactory.getSportBroker().findById(sportId);
+        
+        Sport sport = getBrokerFactory().getSportBroker().findById(sportId);
         if (sport == null) {
             throw new SportstatsServiceException("No sport with given ID");
         }
         league.setSport(sport);
+        
         league.save();
-        conn.close();
+        
         return league;
     }
     

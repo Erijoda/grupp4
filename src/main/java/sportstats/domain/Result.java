@@ -31,11 +31,19 @@ public class Result {
         dao.setParent(game);
     }
     
-    public Integer getScoreAwayTeam() {
-        return dao.getInteger("score_away_team");
+    public Long getScoreAwayTeam() {
+        return dao.getLong("score_away_team");
     }
     
-    public void setScoreAwayTeam(Integer score_away_team) {
+    public void setScoreAwayTeam(Long score_away_team) {
         dao.setInteger("score_away_team", score_away_team);
+    }
+    
+    public Long getScoreHomeTeam() {
+        return dao.getLong("score_home_team");
+    }
+    
+    public void setScoreHomeTeam(Long score_away_team) {
+        dao.setLong("score_away_team", score_away_team);
     }
 }

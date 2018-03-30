@@ -4,7 +4,6 @@ import sportstats.domain.Sport;
 import sportstats.domain.Team;
 
 public class AddTeamService extends BaseService<Team> {
-
     private final String name;
     private final Long sportId;
     
@@ -23,12 +22,15 @@ public class AddTeamService extends BaseService<Team> {
     public Team execute() {
         Team team = getBrokerFactory().getTeamBroker().create();
         team.setName(name);
+        
         Sport sport = getBrokerFactory().getSportBroker().findById(sportId);
         if (sport == null) {
             throw new SportstatsServiceException("No sport with given ID");
         }
         team.setSport(sport);
+        
         team.save();
+        
         return team;
     }
 }

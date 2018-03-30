@@ -5,12 +5,9 @@
  */
 package sportstats.domain;
 
-import static java.lang.Long.getLong;
-import org.javalite.activejdbc.Model;
 import sportstats.domain.dao.ArenaDao;
 import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.RoundDao;
-import sportstats.domain.dao.TableDao;
 import sportstats.domain.dao.TeamDao;
 
 /**
@@ -40,15 +37,22 @@ public class Game {
         return new Team(TeamDao.findById(dao.getLong("home_team_id")));
     }
 
-    public Team getAwayTeam() {
-        return new Team(TeamDao.findById(dao.getLong("away_team_id")));
-    }
-
     public void setHomeTeam(Team homeTeam) {
         if (homeTeam.getId() == null) {
             homeTeam.save();
         }
         dao.setLong("home_team_id", homeTeam.getId());
+    }
+
+    public Team getAwayTeam() {
+        return new Team(TeamDao.findById(dao.getLong("away_team_id")));
+    }
+
+    public void setAwayTeam(Team awayTeam) {
+        if (awayTeam.getId() == null) {
+            awayTeam.save();
+        }
+        dao.setLong("away_team_id", awayTeam.getId());
     }
     
     public RoundDao getRound() {
@@ -65,14 +69,6 @@ public class Game {
     
     public void setArena(ArenaDao arena) {
         dao.setParent(arena);
-    }
-    
-    public TableDao getTable() {
-        return dao.parent(TableDao.class);
-    }
-    
-    public void setTable(TableDao table) {
-        dao.setParent(table);
     }
 }   
     

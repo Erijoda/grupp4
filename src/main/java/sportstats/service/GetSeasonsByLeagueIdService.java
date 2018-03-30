@@ -16,20 +16,17 @@ import sportstats.domain.dao.SeasonDao;
  *
  * @author Rebecca
  */
-public class GetSeasonsByLeagueIdService {
+public class GetSeasonsByLeagueIdService extends BaseService<List<Season>> {
     private final Long leagueId;
     
     public GetSeasonsByLeagueIdService(Long leagueId) {
         this.leagueId = leagueId;
     }
     
-    
+    @Override
     public List<Season> execute() {
-        DbConn._open();
-        List<Season> result = SeasonDao.find("id_leagues = ?", leagueId).stream()
-                .map(seasonDao -> new Season((SeasonDao)seasonDao))
-                .collect(Collectors.toList());
-        DbConn._close();
+        List<Season> result = getBrokerFactory()
+                .getSeasonBroker().findByLeagueId(leagueId);
         return result;
     }
 }

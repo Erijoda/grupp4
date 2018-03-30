@@ -37,11 +37,5 @@ public class ServiceRunner<T> {
             dbConn.close();
         }
         return jsonResult;
-    }
-    
-    public static void main(String[] args) {
-        System.out.println(
-        new ServiceRunner<>(new GetAllSportsService()).execute()
-        );
-    }  
+    } 
 }

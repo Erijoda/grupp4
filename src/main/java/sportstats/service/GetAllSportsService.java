@@ -2,7 +2,6 @@ package sportstats.service;
 
 import java.util.List;
 import sportstats.domain.Sport;
-import sportstats.service.BaseService;
 
 public class GetAllSportsService extends BaseService<List<Sport>> {
 

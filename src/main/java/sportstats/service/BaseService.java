@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package sportstats.service;
+
 import sportstats.domain.broker.BrokerFactory;
+
 /**
  *
  * @author Rebecca
@@ -21,7 +23,7 @@ public abstract class BaseService<T> implements SportstatsService<T> {
     protected BrokerFactory getBrokerFactory() {
         return brokerFactory;
     }
-    
+
     @Override
     public abstract T execute();
 }
