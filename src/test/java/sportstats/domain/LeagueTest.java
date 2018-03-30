@@ -28,7 +28,7 @@ public class LeagueTest {
         
         //when(dao.getClass()).thenReturn(new Sport);
         
-        League instance = new League(dao);
+        League instance = League.of(dao);
         assertEquals("Hej", instance.getName());
         assertNotEquals("Poff", instance.getName());
     }

@@ -16,8 +16,10 @@ public abstract class BaseService<T> implements SportstatsService<T> {
     private BrokerFactory brokerFactory;
 
     @Override
-    public final void init(BrokerFactory brokerFactory) {
+    public final SportstatsService<T> init(BrokerFactory brokerFactory) {
         this.brokerFactory = brokerFactory;
+        
+        return this;
     }
 
     protected BrokerFactory getBrokerFactory() {

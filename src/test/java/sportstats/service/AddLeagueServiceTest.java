@@ -1,30 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sportstats.service;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import sportstats.domain.League;
 import sportstats.domain.Sport;
-import sportstats.domain.Team;
 import sportstats.domain.broker.BrokerFactory;
+import sportstats.domain.broker.LeagueBroker;
 import sportstats.domain.broker.SportBroker;
-import sportstats.domain.broker.TeamBroker;
 
-public class AddTeamServiceTest {
-    
+/**
+ *
+ * @author davik
+ */
+public class AddLeagueServiceTest {
     @Test
     public void nameIsNullThrowsException() {
         try {
-            new AddTeamService(null, 0L);
-            fail("Should throw a Exception");
-        } catch (SportstatsServiceException ex) {}
+            new AddLeagueService(null, 0L);
+            fail("Should throw Exception");
+        } catch (SportstatsServiceException ex) {};
     }
     
     @Test
     public void sportIdIsNullThrowsException() {
         try {
-            new AddTeamService("Name", null);
-            fail("Should throw a Exception");
+            new AddLeagueService("Name", null);
+            fail("Should throw Exception");
         } catch (SportstatsServiceException ex) {}
     }
     
@@ -33,36 +41,36 @@ public class AddTeamServiceTest {
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithSettings();
         
         try {
-            new AddTeamService("Name", 1L)
+            new AddLeagueService("Name", 1L)
                     .init(brokerFactory)
                     .execute();
-            fail("Should throw a Exception");
+            fail("Should throw Exception");
         } catch (SportstatsServiceException ex) {}
     }
     
     @Test
-    public void existingSportReturnsTeam() {
+    public void existingSportReturnsLeague() {
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithSettings();
         
-        Team team = null;
+        League league = null;
         try {
-            team = new AddTeamService("Name", 0L)
+            league = new AddLeagueService("Name", 0L)
                     .init(brokerFactory)
                     .execute();
         } catch (SportstatsServiceException ex) {
             fail("Should not throw Exception");
         }
         
-        assertThat(team, instanceOf(Team.class));
+        assertThat(league, instanceOf(League.class));
     }
     
     private BrokerFactory getMockedBrokerFactory() {
         BrokerFactory brokerFactory = mock(BrokerFactory.class);
         SportBroker sportBroker = mock(SportBroker.class);
-        TeamBroker teamBroker = mock(TeamBroker.class);
+        LeagueBroker leagueBroker = mock(LeagueBroker.class);
         
         when(brokerFactory.getSportBroker()).thenReturn(sportBroker);
-        when(brokerFactory.getTeamBroker()).thenReturn(teamBroker);
+        when(brokerFactory.getLeagueBroker()).thenReturn(leagueBroker);
         
         return brokerFactory;
     }
@@ -70,14 +78,14 @@ public class AddTeamServiceTest {
     private BrokerFactory getMockedBrokerFactoryWithSettings() {
         BrokerFactory brokerFactory = getMockedBrokerFactory();
         Sport sport = mock(Sport.class);
-        Team team = mock(Team.class);
+        League league = mock(League.class);
         
         SportBroker sportBroker = brokerFactory.getSportBroker();
-        TeamBroker teamBroker = brokerFactory.getTeamBroker();
+        LeagueBroker leagueBroker = brokerFactory.getLeagueBroker();
         
         when(sportBroker.findById(0L)).thenReturn(sport);
         when(sportBroker.findById(1L)).thenReturn(null);
-        when(teamBroker.create()).thenReturn(team);
+        when(leagueBroker.create()).thenReturn(league);
         
         return brokerFactory;
     }

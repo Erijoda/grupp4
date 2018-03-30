@@ -13,7 +13,7 @@ import sportstats.domain.broker.BrokerFactory;
  */
 public interface SportstatsService<T> {
 
-    void init(BrokerFactory brokerFactory);
+    SportstatsService<T> init(BrokerFactory brokerFactory);
 
     T execute();
 }

@@ -9,7 +9,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SportDao;
 
 /**
@@ -26,7 +25,7 @@ public class SportTest {
         SportDao dao = mock(SportDao.class);
         when(dao.getString("name")).thenReturn("Foo");
         
-        Sport instance = new Sport(dao);
+        Sport instance = Sport.of(dao);
         assertEquals("Foo", instance.getName());
         assertNotEquals("Poff", instance.getName());
     }

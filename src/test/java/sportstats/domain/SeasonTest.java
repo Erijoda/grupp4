@@ -25,7 +25,7 @@ public class SeasonTest {
                 .thenReturn(Boolean.FALSE)
                 .thenReturn(Boolean.TRUE);
         
-        Season instance = new Season(dao);
+        Season instance = Season.of(dao);
         assertEquals("1989 - 1990", instance.getName());
         assertEquals("1989", instance.getName());
     }
