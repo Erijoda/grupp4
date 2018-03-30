@@ -30,7 +30,7 @@ public class AddSeasonServiceTest {
     }
     
     @Test
-    public void winterSeasonIsNullThrowsException() {
+    public void summerSeasonIsNullThrowsException() {
         try {
             new AddSeasonService(2015L, null, 1L);
             fail("Should throw Exception");

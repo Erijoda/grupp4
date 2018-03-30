@@ -21,6 +21,9 @@ public class AddSeasonService extends BaseService<Season> {
         if (year == null) {
             throw new SportstatsServiceException("Year should not be null");
         }
+        if (summer == null) {
+            throw new SportstatsServiceException("Summer should be true or false");
+        }
         if (leagueId == null) {
             throw new SportstatsServiceException("Id for league should not be null");
         }
