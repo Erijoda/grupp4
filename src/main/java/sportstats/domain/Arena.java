@@ -6,6 +6,7 @@
 package sportstats.domain;
 
 import sportstats.domain.dao.ArenaDao;
+import sportstats.domain.dao.GameDao;
 
 /**
  *
@@ -18,8 +19,16 @@ public class Arena {
         this(new ArenaDao());
     }
     
-    public Arena(ArenaDao dao) {
+    private Arena(ArenaDao dao) {
         this.dao = dao;
+    }
+    
+    public static Arena of(ArenaDao dao) {
+        return dao == null ? null : new Arena(dao);
+    }
+
+    public void setAsChild(GameDao gameDao) {
+        gameDao.setParent(dao);
     }
     
 }

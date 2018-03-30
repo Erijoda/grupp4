@@ -16,16 +16,16 @@ import sportstats.domain.dao.TeamDao;
 public class TeamBroker {
 
     public Team create() {
-        return new Team(new TeamDao());
+        return new Team();
     }
     
     public Team findById(Long teamId) {
-        return new Team(TeamDao.findById(teamId));
+        return Team.of(TeamDao.findById(teamId));
     }
     
     public List<Team> findBySportId(Long sportId) {
         return TeamDao.find("sport_id = ?", sportId).stream()
-                .map(teamDao -> new Team((TeamDao)teamDao))
+                .map(teamDao -> Team.of((TeamDao)teamDao))
                 .collect(Collectors.toList());
     }
     

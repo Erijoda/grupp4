@@ -19,16 +19,20 @@ public class Result {
         this(new ResultDao());
     }
     
-    public Result(ResultDao dao) {
+    private Result(ResultDao dao) {
         this.dao = dao;
     }
     
-    public GameDao getGame() {
-        return dao.parent(GameDao.class);
+    public static Result of(ResultDao dao) {
+        return dao == null ? null : new Result(dao);
     }
     
-    public void setGame(GameDao game) {
-        dao.setParent(game);
+    public Game getGame() {
+        return Game.of(dao.parent(GameDao.class));
+    }
+    
+    public void setGame(Game game) {
+        game.setAsChild(dao);
     }
     
     public Long getScoreAwayTeam() {

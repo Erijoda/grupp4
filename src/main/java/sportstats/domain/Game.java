@@ -7,6 +7,7 @@ package sportstats.domain;
 
 import sportstats.domain.dao.ArenaDao;
 import sportstats.domain.dao.GameDao;
+import sportstats.domain.dao.ResultDao;
 import sportstats.domain.dao.RoundDao;
 import sportstats.domain.dao.TeamDao;
 
@@ -21,8 +22,12 @@ public class Game {
         this(new GameDao());
     }
     
-    public Game(GameDao dao) {
+    private Game(GameDao dao) {
         this.dao = dao;
+    }
+    
+    public static Game of(GameDao dao) {
+        return dao == null ? null : new Game(dao);
     }
     
     public String getName() {
@@ -34,41 +39,45 @@ public class Game {
     }
     
     public Team getHomeTeam() {
-        return new Team(TeamDao.findById(dao.getLong("home_team_id")));
+        return Team.of(TeamDao.findById(dao.getLong("home_team_id")));
     }
 
-    public void setHomeTeam(Team homeTeam) {
-        if (homeTeam.getId() == null) {
-            homeTeam.save();
+    public void setHomeTeam(Team team) {
+        if (team.getId() == null) {
+            team.save();
         }
-        dao.setLong("home_team_id", homeTeam.getId());
+        dao.setLong("home_team_id", team.getId());
     }
 
     public Team getAwayTeam() {
-        return new Team(TeamDao.findById(dao.getLong("away_team_id")));
+        return Team.of(TeamDao.findById(dao.getLong("away_team_id")));
     }
 
-    public void setAwayTeam(Team awayTeam) {
-        if (awayTeam.getId() == null) {
-            awayTeam.save();
+    public void setAwayTeam(Team team) {
+        if (team.getId() == null) {
+            team.save();
         }
-        dao.setLong("away_team_id", awayTeam.getId());
+        dao.setLong("away_team_id", team.getId());
     }
     
-    public RoundDao getRound() {
-        return dao.parent(RoundDao.class);
+    public Round getRound() {
+        return Round.of(dao.parent(RoundDao.class));
     }
     
-    public void setRound(RoundDao round) {
-        dao.setParent(round);
+    public void setRound(Round round) {
+        round.setAsChild(dao);
     }
     
-    public ArenaDao getArena() {
-        return dao.parent(ArenaDao.class);
+    public Arena getArena() {
+        return Arena.of(dao.parent(ArenaDao.class));
     }
     
-    public void setArena(ArenaDao arena) {
-        dao.setParent(arena);
+    public void setArena(Arena arena) {
+        arena.setAsChild(dao);
+    }
+
+    public void setAsChild(ResultDao resultDao) {
+        resultDao.setParent(dao);
     }
 }   
     

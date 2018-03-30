@@ -5,6 +5,7 @@
  */
 package sportstats.domain;
 
+import sportstats.domain.dao.RoundDao;
 import sportstats.domain.dao.SeasonDao;
 
 /**
@@ -19,8 +20,12 @@ public class Season {
         this(new SeasonDao());
     }
     
-    public Season(SeasonDao dao) {
+    private Season(SeasonDao dao) {
         this.dao = dao;
+    }
+    
+    public static Season of(SeasonDao dao) {
+        return dao == null ? null : new Season(dao);
     }
     
     public Integer getYear() {
@@ -50,5 +55,9 @@ public class Season {
     public String getName() {
         return String.valueOf(getYear()) +
                 (isSummer() ? "" : " - " + (getYear() + 1));
+    }
+
+    public void setAsChild(RoundDao roundDao) {
+        roundDao.setParent(dao);
     }
 }

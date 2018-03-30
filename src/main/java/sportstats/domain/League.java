@@ -1,12 +1,9 @@
 package sportstats.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.javalite.activejdbc.Model;
 import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SeasonDao;
-import sportstats.domain.dao.SportDao;
 
 /**
  *
@@ -20,8 +17,12 @@ public class League {
         this(new LeagueDao());
     }
     
-    public League(LeagueDao dao) {
+    private League(LeagueDao dao) {
         this.dao = dao;
+    }
+    
+    public static League of(LeagueDao dao) {
+        return dao == null ? null : new League(dao);
     }
     
     public Long getId() {
@@ -37,7 +38,7 @@ public class League {
     }
     
     public void setSport(Sport sport) {
-        dao.setLong("sports_id", sport.getId());
+        dao.setLong("sport_id", sport.getId());
     }
     
     public void save() {
@@ -51,13 +52,7 @@ public class League {
     
     public List<Season> getSeasons() {
         return dao.getAll(SeasonDao.class).stream()
-                .map(dao -> new Season(dao))
+                .map(dao -> Season.of(dao))
                 .collect(Collectors.toList());
-        /*List<SeasonDao> daos = getAll(SeasonDao.class);
-        List<Season> result = new ArrayList<>();
-        for (SeasonDao dao : daos) {
-            result.add(new Season(dao));
-        }
-        return result;*/
     }
 }

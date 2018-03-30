@@ -3,7 +3,6 @@ package sportstats.domain;
 import com.owlike.genson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.javalite.activejdbc.Model;
 import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SportDao;
 
@@ -15,13 +14,17 @@ public class Sport {
         this(new SportDao());
     }
     
-    public Sport(SportDao dao) {
+    private Sport(SportDao dao) {
         this.dao = dao;
     }
+    
+    public static Sport of(SportDao dao) {
+        return dao == null ? null : new Sport(dao);
+    }
+    
     public Long getId() {
         return dao.getLong("id");
     }
-
     
     public String getName() {
         return dao.getString("name");
@@ -34,7 +37,7 @@ public class Sport {
     @JsonIgnore
     public List<League> getLeagues() {
         return dao.getAll(LeagueDao.class).stream()
-                .map(leagueDao -> new League(leagueDao))
+                .map(leagueDao -> League.of(leagueDao))
                 .collect(Collectors.toList());
     }
 

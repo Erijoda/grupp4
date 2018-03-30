@@ -17,12 +17,12 @@ import sportstats.domain.dao.SportDao;
 public class SportBroker {
     public List<Sport> findAll() {
         return SportDao.findAll().stream()
-                .map(dao -> new Sport((SportDao) dao))
+                .map(dao -> Sport.of((SportDao) dao))
                 .collect(Collectors.toList());
     }
     
     public Sport findById(Long sportId) {
-        return new Sport(SportDao.findById(sportId));
+        return Sport.of(SportDao.findById(sportId));
     }
     
     public Sport create() {

@@ -5,6 +5,7 @@
  */
 package sportstats.domain;
 
+import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.RoundDao;
 import sportstats.domain.dao.SeasonDao;
 
@@ -19,16 +20,24 @@ public class Round {
         this(new RoundDao());
     }
     
-    public Round(RoundDao dao) {
+    private Round(RoundDao dao) {
         this.dao = dao;
     }
     
-    public SeasonDao getSeason() {
-        return dao.parent(SeasonDao.class);
+    public static Round of(RoundDao dao) {
+        return dao == null ? null : new Round(dao);
     }
     
-    public void setSeason(SeasonDao season) {
-        dao.setParent(season);
+    public Season getSeason() {
+        return Season.of(dao.parent(SeasonDao.class));
+    }
+    
+    public void setSeason(Season season) {
+        season.setAsChild(dao);
+    }
+
+    public void setAsChild(GameDao gameDao) {
+        gameDao.setParent(dao);
     }
     
 }

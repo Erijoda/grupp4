@@ -5,7 +5,6 @@
  */
 package sportstats.domain;
 
-import org.javalite.activejdbc.Model;
 import sportstats.domain.dao.TeamDao;
 
 /**
@@ -20,8 +19,12 @@ public class Team {
         this(new TeamDao());
     }
     
-    public Team(TeamDao dao) {
+    private Team(TeamDao dao) {
         this.dao = dao;
+    }
+    
+    public static Team of(TeamDao dao) {
+        return dao == null ? null : new Team(dao);
     }
     
     public Long getId() {

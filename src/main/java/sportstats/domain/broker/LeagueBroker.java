@@ -17,16 +17,16 @@ import sportstats.domain.dao.LeagueDao;
 public class LeagueBroker {
 
     public League create() {
-        return new League(new LeagueDao());
+        return new League();
     }
 
     public League findById(Long leagueId) {
-        return new League(LeagueDao.findById(leagueId));
+        return League.of(LeagueDao.findById(leagueId));
     }
 
     public List<League> findBySportId(Long sportId) {
         return LeagueDao.find("sport_id = ?", sportId).stream()
-                .map(leagueDao -> new League((LeagueDao) leagueDao))
+                .map(leagueDao -> League.of((LeagueDao) leagueDao))
                 .collect(Collectors.toList());
     }
 
