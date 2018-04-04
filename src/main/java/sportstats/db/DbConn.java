@@ -12,8 +12,9 @@ import org.javalite.activejdbc.Base;
  * @author Rebecca
  */
 public class DbConn {
+    private static String Dburl = System.getProperty("Ddburl", "node71250-env-grupp4.jls-sto1.elastx.net:11069/sportstats1");
     public static void _open() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://node71250-env-grupp4.jls-sto1.elastx.net:11069/sportstats1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "sportstats", "asafepassw");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://" + Dburl + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "sportstats", "asafepassw");
     }
     
     public static void _close() {
@@ -21,7 +22,7 @@ public class DbConn {
     }
     
     public void open() {
-        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://node71250-env-grupp4.jls-sto1.elastx.net:11069/sportstats1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "sportstats", "asafepassw");
+        Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://" + Dburl + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "sportstats", "asafepassw");
     }
     
     public void close() {
