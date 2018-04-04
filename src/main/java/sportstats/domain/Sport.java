@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SportDao;
+import sportstats.domain.dao.TeamDao;
 
 public class Sport {
     
@@ -41,8 +42,12 @@ public class Sport {
                 .collect(Collectors.toList());
     }
 
-    void setAsChild(LeagueDao leagueDao) {
+    public void setAsChild(LeagueDao leagueDao) {
         leagueDao.setParent(dao);
+    }
+    
+    public void setAsChild(TeamDao teamDao) {
+        teamDao.setParent(dao);
     }
     
     @Override

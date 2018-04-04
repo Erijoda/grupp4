@@ -40,7 +40,7 @@ public class Team {
     }
 
     public void setSport(Sport sport) {
-        dao.setLong("sports_id", sport.getId());
+        sport.setAsChild(dao);
     }
 
     public void save() {
