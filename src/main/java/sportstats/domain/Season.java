@@ -28,8 +28,12 @@ public class Season {
         return dao == null ? null : new Season(dao);
     }
     
-    public Integer getYear() {
-        return dao.getInteger("year");
+    public Long getId() {
+        return dao.getLongId();
+    }
+    
+    public Long getYear() {
+        return dao.getLong("year");
     }
     
     public void setYear(Long year) {
@@ -45,7 +49,7 @@ public class Season {
     }
     
     public void setLeague(League league) {
-        dao.setLong("id_leagues", league.getId());
+        league.setAsChild(dao);
     }
     
     public void save() {

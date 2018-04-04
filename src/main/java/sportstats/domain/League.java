@@ -26,7 +26,7 @@ public class League {
     }
     
     public Long getId() {
-        return dao.getLong("id");
+        return dao.getLongId();
     }
 
     public String getName() {
@@ -39,6 +39,10 @@ public class League {
     
     public void setSport(Sport sport) {
         dao.setLong("sport_id", sport.getId());
+    }
+    
+    public void setAsChild(SeasonDao seasonDao) {
+        seasonDao.setParent(dao);
     }
     
     public void save() {

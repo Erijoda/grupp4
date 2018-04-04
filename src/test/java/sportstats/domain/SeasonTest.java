@@ -20,7 +20,7 @@ public class SeasonTest {
     @Test
     public void testNameIsCompliant() {
         SeasonDao dao = mock(SeasonDao.class);
-        when(dao.getInteger("year")).thenReturn(1989);
+        when(dao.getLong("year")).thenReturn(1989L);
         when(dao.getBoolean("summer"))
                 .thenReturn(Boolean.FALSE)
                 .thenReturn(Boolean.TRUE);
