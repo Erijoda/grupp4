@@ -53,10 +53,4 @@ public class League {
     public String toString() {
         return getName() + " (id: " + getId() + ")";
     }
-    
-    public List<Season> getSeasons() {
-        return dao.getAll(SeasonDao.class).stream()
-                .map(dao -> Season.of(dao))
-                .collect(Collectors.toList());
-    }
 }
