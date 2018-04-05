@@ -63,11 +63,11 @@ public class Game {
     public Round getRound() {
         return Round.of(dao.parent(RoundDao.class));
     }
-    
+/*    
     public void setRound(Round round) {
         round.setAsChild(dao);
     }
-    
+*/    
     public Arena getArena() {
         return Arena.of(dao.parent(ArenaDao.class));
     }
