@@ -82,7 +82,7 @@ public class Game {
     }
     
     public Long getArenaId() {
-        return dao.parent(ArenaDao.class).getLongId();
+        return dao.getLong("arena_id");
     }
     
     public void setArena(Arena arena) {
