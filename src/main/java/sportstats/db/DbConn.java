@@ -28,4 +28,8 @@ public class DbConn {
     public void close() {
         Base.close();
     }
+    
+    public static boolean hasConnection() {
+        return Base.hasConnection();
+    }
 }

@@ -23,19 +23,17 @@ public class ServiceRunner<T> {
 
     public String execute() {
         DbConn dbConn = new DbConn();
+        
         service.init(new BrokerFactory());
-        String jsonResult;
-        T result = null;
         try {
             dbConn.open();
-            result = service.execute();
-            jsonResult = new JsonOutputFormatter().createOutput(result);
+            
+            return new JsonOutputFormatter().createOutput(service.execute());
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
             throw ex;
         } finally {
             dbConn.close();
         }
-        return jsonResult;
-    } 
+    }
 }
