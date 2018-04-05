@@ -8,13 +8,13 @@ import sportstats.domain.Season;
  *
  * @author mattkranc
  */
-public class AddRoundBySeasonService extends BaseService<Round>{
+public class AddRoundService extends BaseService<Round>{
     
         private final Long seasonId;
         
-    public AddRoundBySeasonService(Long seasonId) {
+    public AddRoundService(Long seasonId) {
         if (seasonId == null) {
-            throw new SportstatsServiceException("Season doesn't exist");
+            throw new SportstatsServiceException("Season should not be null");
         }
         this.seasonId = seasonId;
     }
@@ -27,7 +27,7 @@ public class AddRoundBySeasonService extends BaseService<Round>{
         
         Season season = getBrokerFactory().getSeasonBroker().findById(seasonId);
         if (season == null) {
-            throw new SportstatsServiceException("Season doesn't exist");
+            throw new SportstatsServiceException("Season with the given id does not exist");
         }
         
         round.setSeason(season);
