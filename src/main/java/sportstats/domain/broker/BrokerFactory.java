@@ -21,4 +21,8 @@ public class BrokerFactory {
     public SeasonBroker getSeasonBroker() {
         return new SeasonBroker();
     }
+    
+    public SeasonTeamBroker getSeasonTeamBroker() {
+        return new SeasonTeamBroker();
+    }
 }

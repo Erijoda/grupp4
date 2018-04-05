@@ -52,4 +52,7 @@ public class Team {
         return getName() + " (id: " + getId() + ")";
     }
     
+    public void addToSeason(Season season) {
+        season.addTeam(dao);
+    }
 }
