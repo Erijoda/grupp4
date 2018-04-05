@@ -7,6 +7,7 @@ package sportstats.domain;
 
 import sportstats.domain.dao.RoundDao;
 import sportstats.domain.dao.SeasonDao;
+import sportstats.domain.dao.TeamDao;
 
 /**
  *
@@ -63,5 +64,9 @@ public class Season {
 
     public void setAsChild(RoundDao roundDao) {
         roundDao.setParent(dao);
+    }
+    
+    public void addTeam(TeamDao teamDao) {
+        dao.add(teamDao);
     }
 }
