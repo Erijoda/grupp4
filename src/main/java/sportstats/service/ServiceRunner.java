@@ -24,34 +24,16 @@ public class ServiceRunner<T> {
     public String execute() {
         DbConn dbConn = new DbConn();
         
+        service.init(new BrokerFactory());
         try {
             dbConn.open();
             
-            return new JsonOutputFormatter().createOutput(executeWithoutJson());
+            return new JsonOutputFormatter().createOutput(service.execute());
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
             throw ex;
         } finally {
             dbConn.close();
-        }
-    }
-    
-    protected T executeWithoutJson() {
-        DbConn dbConn = null;
-        
-        service.init(new BrokerFactory());
-        try {
-            if (!DbConn.hasConnection()) {
-                dbConn = new DbConn();
-                dbConn.open();
-            }
-            
-            return service.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-            throw ex;
-        } finally {
-            if(dbConn != null) dbConn.close();
         }
     }
 }

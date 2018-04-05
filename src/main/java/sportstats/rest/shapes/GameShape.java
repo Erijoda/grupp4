@@ -12,4 +12,6 @@ package sportstats.rest.shapes;
 public class GameShape {
     public Long homeTeamId;
     public Long awayTeamId;
+    
+    public GameShape() {}
 }

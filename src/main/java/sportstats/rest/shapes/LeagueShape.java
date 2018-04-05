@@ -12,4 +12,6 @@ package sportstats.rest.shapes;
 public class LeagueShape {
     public String name;
     public Long sportId;
+    
+    public LeagueShape() {}
 }

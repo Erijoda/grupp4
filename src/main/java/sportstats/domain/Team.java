@@ -28,7 +28,7 @@ public class Team {
     }
     
     public Long getId() {
-        return dao.getLong("id");
+        return dao.getLongId();
     }
 
     public String getName() {
