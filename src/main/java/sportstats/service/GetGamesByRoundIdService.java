@@ -8,11 +8,11 @@ import sportstats.domain.Game;
  *
  * @author mattkranc
  */
-public class GetGamesByRoundService extends BaseService<List<Game>> {
+public class GetGamesByRoundIdService extends BaseService<List<Game>> {
 
     private final Long roundId;
     
-    public GetGamesByRoundService(Long roundId) {
+    public GetGamesByRoundIdService(Long roundId) {
         this.roundId = roundId;
     }
     
