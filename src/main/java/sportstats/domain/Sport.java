@@ -7,7 +7,7 @@ import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SportDao;
 import sportstats.domain.dao.TeamDao;
 
-public class Sport {
+public class Sport implements Base<SportDao> {
     
     private final SportDao dao;
     
@@ -21,6 +21,11 @@ public class Sport {
     
     public static Sport of(SportDao dao) {
         return dao == null ? null : new Sport(dao);
+    }
+    
+    @Override
+    public SportDao getDao() {
+        return dao;
     }
     
     public Long getId() {

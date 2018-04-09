@@ -33,4 +33,8 @@ public class BrokerFactory {
     public GameBroker getGameBroker() {
         return new GameBroker();
     }
+    
+    public ResultBroker getResultBroker() {
+        return new ResultBroker();
+    }
 }

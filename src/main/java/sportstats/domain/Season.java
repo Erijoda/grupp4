@@ -13,8 +13,7 @@ import sportstats.domain.dao.TeamDao;
  *
  * @author Rebecca
  */
-public class Season {
-    
+public class Season implements Base<SeasonDao> {
     private final SeasonDao dao; 
     
     public Season() {
@@ -27,6 +26,11 @@ public class Season {
     
     public static Season of(SeasonDao dao) {
         return dao == null ? null : new Season(dao);
+    }
+    
+    @Override
+    public SeasonDao getDao() {
+        return dao;
     }
     
     public Long getId() {

@@ -11,7 +11,7 @@ import sportstats.domain.dao.TeamDao;
  *
  * @author Rebecca
  */
-public class Team {
+public class Team implements Base<TeamDao> {
     
     private final TeamDao dao;
     
@@ -25,6 +25,11 @@ public class Team {
     
     public static Team of(TeamDao dao) {
         return dao == null ? null : new Team(dao);
+    }
+    
+    @Override
+    public TeamDao getDao() {
+        return dao;
     }
     
     public Long getId() {

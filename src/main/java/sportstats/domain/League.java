@@ -9,8 +9,7 @@ import sportstats.domain.dao.SeasonDao;
  *
  * @author thomas
  */
-public class League {
-    
+public class League implements Base<LeagueDao> {
     private final LeagueDao dao;
     
     public League() {
@@ -23,6 +22,11 @@ public class League {
     
     public static League of(LeagueDao dao) {
         return dao == null ? null : new League(dao);
+    }
+    
+    @Override
+    public LeagueDao getDao() {
+        return dao;
     }
     
     public Long getId() {

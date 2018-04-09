@@ -6,6 +6,7 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
+import sportstats.domain.broker.BrokerFactory;
 import sportstats.domain.dao.ArenaDao;
 import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.ResultDao;
@@ -16,7 +17,7 @@ import sportstats.domain.dao.TeamDao;
  *
  * @author Rebecca
  */
-public class Game {
+public class Game implements Base<GameDao> {
     private final GameDao dao;
     
     public Game() {
@@ -29,6 +30,15 @@ public class Game {
     
     public static Game of(GameDao dao) {
         return dao == null ? null : new Game(dao);
+    }
+    
+    @Override
+    public GameDao getDao() {
+        return dao;
+    }
+    
+    public Long getId() {
+        return dao.getLongId();
     }
     
     public String getName() {
@@ -74,6 +84,12 @@ public class Game {
     
     public void setRound(Round round) {
         round.setAsChild(dao);
+    }
+    
+    public Result getResult() {
+        return new BrokerFactory()
+                .getResultBroker()
+                .findByGameId(getId());
     }
     
     @JsonIgnore //In favor of getting the id instead

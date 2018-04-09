@@ -25,4 +25,8 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
+    
+    public Game findById(Long gameId) {
+        return Game.of(GameDao.findById(gameId));
+    }
 }

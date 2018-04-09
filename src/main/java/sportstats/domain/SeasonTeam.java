@@ -11,7 +11,7 @@ import sportstats.domain.dao.SeasonTeamDao;
  *
  * @author Davik
  */
-public class SeasonTeam {
+public class SeasonTeam implements Base<SeasonTeamDao> {
     private final SeasonTeamDao dao;
     
     public SeasonTeam() {
@@ -24,6 +24,11 @@ public class SeasonTeam {
     
     public static SeasonTeam of(SeasonTeamDao dao) {
         return dao == null ? null : new SeasonTeam(dao);
+    }
+    
+    @Override
+    public SeasonTeamDao getDao() {
+        return dao;
     }
     
     public Long getSeasonId() {

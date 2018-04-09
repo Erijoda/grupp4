@@ -36,4 +36,20 @@ public class ServiceRunner<T> {
             dbConn.close();
         }
     }
+    
+    protected T executeWithoutJson() {
+        DbConn dbConn = new DbConn();
+        
+        service.init(new BrokerFactory());
+        try {
+            dbConn.open();
+            
+            return service.execute();
+        } catch (Exception ex) {
+            ex.printStackTrace(System.out);
+            throw ex;
+        } finally {
+            dbConn.close();
+        }
+    }
 }

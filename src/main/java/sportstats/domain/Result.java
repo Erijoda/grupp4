@@ -5,6 +5,7 @@
  */
 package sportstats.domain;
 
+import com.owlike.genson.annotation.JsonIgnore;
 import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.ResultDao;
 
@@ -12,7 +13,7 @@ import sportstats.domain.dao.ResultDao;
  *
  * @author Rebecca
  */
-public class Result {
+public class Result implements Base<ResultDao> {
     private final ResultDao dao;
     
     public Result() {
@@ -27,8 +28,18 @@ public class Result {
         return dao == null ? null : new Result(dao);
     }
     
+    @Override
+    public ResultDao getDao() {
+        return dao;
+    }
+    
+    @JsonIgnore
     public Game getGame() {
         return Game.of(dao.parent(GameDao.class));
+    }
+    
+    public Long getGameId() {
+        return dao.getLong("game_id");
     }
     
     public void setGame(Game game) {
@@ -39,15 +50,19 @@ public class Result {
         return dao.getLong("score_away_team");
     }
     
-    public void setScoreAwayTeam(Long score_away_team) {
-        dao.setInteger("score_away_team", score_away_team);
+    public void setScoreAwayTeam(Long scoreAwayTeam) {
+        dao.setLong("score_away_team", scoreAwayTeam);
     }
     
     public Long getScoreHomeTeam() {
         return dao.getLong("score_home_team");
     }
     
-    public void setScoreHomeTeam(Long score_away_team) {
-        dao.setLong("score_away_team", score_away_team);
+    public void setScoreHomeTeam(Long scoreHomeTeam) {
+        dao.setLong("score_home_team", scoreHomeTeam);
+    }
+
+    public void save() {
+        dao.save();
     }
 }

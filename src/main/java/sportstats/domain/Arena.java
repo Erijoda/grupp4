@@ -12,7 +12,7 @@ import sportstats.domain.dao.GameDao;
  *
  * @author Rebecca
  */
-public class Arena {
+public class Arena implements Base<ArenaDao> {
     private final ArenaDao dao;
     
     public Arena() {
@@ -27,8 +27,17 @@ public class Arena {
         return dao == null ? null : new Arena(dao);
     }
 
+    @Override
+    public ArenaDao getDao() {
+        return dao;
+    }
+
     public void setAsChild(GameDao gameDao) {
         gameDao.setParent(dao);
+    }
+
+    public Long getId() {
+        return dao.getLongId();
     }
     
 }

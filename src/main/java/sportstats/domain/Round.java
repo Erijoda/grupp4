@@ -16,7 +16,7 @@ import sportstats.domain.dao.SeasonDao;
  *
  * @author Rebecca
  */
-public class Round {
+public class Round implements Base<RoundDao> {
     private final RoundDao dao;
     
     public Round() {
@@ -29,6 +29,11 @@ public class Round {
     
     public static Round of(RoundDao dao) {
         return dao == null ? null : new Round(dao);
+    }
+    
+    @Override
+    public RoundDao getDao() {
+        return dao;
     }
     
     public Long getSeasonId() {
