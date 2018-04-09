@@ -1,5 +1,6 @@
 package sportstats.domain;
 
+import com.owlike.genson.annotation.JsonIgnore;
 import java.util.List;
 import java.util.stream.Collectors;
 import sportstats.domain.dao.LeagueDao;
@@ -25,6 +26,7 @@ public class League implements Base<LeagueDao> {
     }
     
     @Override
+    @JsonIgnore
     public LeagueDao getDao() {
         return dao;
     }

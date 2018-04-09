@@ -24,6 +24,7 @@ public class Sport implements Base<SportDao> {
     }
     
     @Override
+    @JsonIgnore
     public SportDao getDao() {
         return dao;
     }

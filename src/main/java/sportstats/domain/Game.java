@@ -33,6 +33,7 @@ public class Game implements Base<GameDao> {
     }
     
     @Override
+    @JsonIgnore
     public GameDao getDao() {
         return dao;
     }

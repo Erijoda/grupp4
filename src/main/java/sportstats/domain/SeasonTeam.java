@@ -5,6 +5,7 @@
  */
 package sportstats.domain;
 
+import com.owlike.genson.annotation.JsonIgnore;
 import sportstats.domain.dao.SeasonTeamDao;
 
 /**
@@ -27,6 +28,7 @@ public class SeasonTeam implements Base<SeasonTeamDao> {
     }
     
     @Override
+    @JsonIgnore
     public SeasonTeamDao getDao() {
         return dao;
     }

@@ -29,6 +29,7 @@ public class Result implements Base<ResultDao> {
     }
     
     @Override
+    @JsonIgnore
     public ResultDao getDao() {
         return dao;
     }

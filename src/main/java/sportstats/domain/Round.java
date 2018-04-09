@@ -32,6 +32,7 @@ public class Round implements Base<RoundDao> {
     }
     
     @Override
+    @JsonIgnore
     public RoundDao getDao() {
         return dao;
     }
