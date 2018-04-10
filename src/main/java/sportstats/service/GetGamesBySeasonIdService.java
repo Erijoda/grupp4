@@ -34,5 +34,4 @@ public class GetGamesBySeasonIdService extends BaseService<List<Game>> {
         
         return games;
     }
-
 }
