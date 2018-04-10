@@ -8,6 +8,8 @@ package sportstats.spikes;
 import java.util.UUID;
 import sportstats.service.AddSportService;
 import sportstats.service.GetAllSportsService;
+import sportstats.service.GetGamesByRoundIdService;
+import sportstats.service.GetGamesBySeasonIdService;
 import sportstats.service.ServiceRunner;
 
 /**
@@ -16,8 +18,17 @@ import sportstats.service.ServiceRunner;
  */
 public class TestElastx {
     public static void main(String[] args) {
-        String random = UUID.randomUUID().toString();
-        System.out.println(new ServiceRunner<>(new AddSportService(random)).execute());
-        System.err.println(new ServiceRunner<>(new GetAllSportsService()).execute());
-    }
+        //String random = UUID.randomUUID().toString();
+        //System.out.println(new ServiceRunner<>(new AddSportService(random)).execute());
+        //System.err.println(new ServiceRunner<>(new GetAllSportsService()).execute());
+    
+    
+        System.out.println(new ServiceRunner<>(new GetGamesBySeasonIdService(1L))
+                .execute());
+        
+        System.out.println(new ServiceRunner<>(new GetGamesByRoundIdService(4L))
+                .execute());
+        
+        }
+    
 }
