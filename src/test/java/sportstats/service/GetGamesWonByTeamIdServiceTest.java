@@ -21,12 +21,12 @@ import sportstats.domain.broker.TeamBroker;
  *
  * @author davik
  */
-public class GetGamesByTeamIdServiceTest {
+public class GetGamesWonByTeamIdServiceTest {
     
     @Test
     public void teamIdIsNullThrowsException() {
         try {
-            new GetGamesByTeamIdService(null);
+            new GetGamesWonByTeamIdService(null);
             fail("Should throw exception");
         } catch (SportstatsServiceException ex) {}
     }
@@ -35,7 +35,7 @@ public class GetGamesByTeamIdServiceTest {
     public void nonExistantTeamThrowsException() {
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithSettings();
         try {
-            new GetGamesByTeamIdService(0L)
+            new GetGamesWonByTeamIdService(0L)
                     .init(brokerFactory)
                     .execute();
             fail("Should throw exception");
@@ -48,7 +48,7 @@ public class GetGamesByTeamIdServiceTest {
         
         List<Game> games = null;
         try {
-            games = new GetGamesByTeamIdService(1L)
+            games = new GetGamesWonByTeamIdService(1L)
                     .init(brokerFactory)
                     .execute();
         } catch (SportstatsServiceException ex) {
