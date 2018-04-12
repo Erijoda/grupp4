@@ -110,6 +110,12 @@ public class Game implements Base<GameDao> {
         resultDao.setParent(dao);
     }
     
+    public void setAsChild(ArenaDao arenaDao) {
+        arenaDao.setParent(dao);
+    }
+    
+    
+    
     public void save() {
         dao.save();
     }

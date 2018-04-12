@@ -11,6 +11,8 @@ import sportstats.service.GetAllSportsService;
 import sportstats.service.GetGamesByRoundIdService;
 import sportstats.service.GetGamesBySeasonIdService;
 import sportstats.service.ServiceRunner;
+import sportstats.service.AddArenaService;
+
 
 /**
  *
@@ -22,12 +24,16 @@ public class TestElastx {
         //System.out.println(new ServiceRunner<>(new AddSportService(random)).execute());
         //System.err.println(new ServiceRunner<>(new GetAllSportsService()).execute());
     
-    
+    /*
         System.out.println(new ServiceRunner<>(new GetGamesBySeasonIdService(1L))
                 .execute());
         
         System.out.println(new ServiceRunner<>(new GetGamesByRoundIdService(4L))
+
                 .execute());
+*/
+        AddArenaService addArena = new AddArenaService("Friends",2L);
+        System.out.println(new ServiceRunner<>(addArena).execute());
         
         }
     
