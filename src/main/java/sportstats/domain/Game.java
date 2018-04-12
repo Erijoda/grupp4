@@ -103,7 +103,6 @@ public class Game implements Base<GameDao> {
     }
     
     public void setArena(Arena arena) {
-        if (dao == null) System.out.println("NULL gameDAO");
         arena.setAsChild(dao);
     }
 

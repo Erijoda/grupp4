@@ -35,7 +35,6 @@ public class Arena implements Base<ArenaDao> {
     }
 
     public void setAsChild(GameDao gameDao) {
-        if (dao == null) System.out.println("NULLAH!");
         gameDao.setParent(dao);
     }
 

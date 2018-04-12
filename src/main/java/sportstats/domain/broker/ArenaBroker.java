@@ -24,6 +24,10 @@ public class ArenaBroker {
      public Arena findByGameId(Long gameId) {
         return Arena.of(ArenaDao.findFirst("game_id = ?", gameId));
     }
+     
+     public Arena findByName(String name) {
+         return Arena.of(ArenaDao.findFirst("name=?", name));
+     }
     
 }
 

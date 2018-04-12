@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sportstats.rest.shapes;
+package sportstats.service.constants;
 
 /**
  *
- * @author Davik
+ * @author davik
  */
-public class GameShape {
-    public Long homeTeamId;
-    public Long awayTeamId;
-    public Long arenaId;
-    
-    public GameShape() {}
+public enum Outcome {
+    ANY,
+    WIN,
+    TIE,
+    LOSS
 }

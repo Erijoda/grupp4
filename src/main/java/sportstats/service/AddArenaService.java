@@ -27,23 +27,22 @@ public class AddArenaService extends BaseService<Arena> {
     
     @Override
     public Arena execute() {
-        Arena arena = getBrokerFactory().getArenaBroker().create();
-        arena.setName(name);
         
+        Arena arena = getBrokerFactory().getArenaBroker().findByName(name);
+        if (arena == null)
+        {
+            arena = getBrokerFactory().getArenaBroker().create();
+            arena.setName(name);
+        }        
         
         Game game = getBrokerFactory().getGameBroker().findById(gameId);
         if (game == null) {
             throw new SportstatsServiceException("No game with given ID");
         }
         arena.save();
-        //e.set("last_name", "Steinbeck").saveIt();
         
         game.setArena(arena);
-        //game.
         game.save();
-        //arena.setGame(game);
-        //game.setArena(arena);
-        //arena.save();
         
         return arena;
     }
