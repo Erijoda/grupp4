@@ -11,15 +11,15 @@ import sportstats.domain.Team;
 
 /**
  *
- * @author davik
+ * @author Davik
  */
-public class GetGamesByTeamIdService extends BaseService<List<Game>> {
-
+public class GetHomeGamesByTeamIdService extends BaseService<List<Game>> {
+    
     private final Long teamId;
 
-    public GetGamesByTeamIdService(Long teamId) {
+    public GetHomeGamesByTeamIdService(Long teamId) {
         if (teamId == null) {
-            throw new SportstatsServiceException("Team id should not be null");
+            throw new SportstatsServiceException("TeamId should not be null");
         }
         this.teamId = teamId;
     }
@@ -28,8 +28,10 @@ public class GetGamesByTeamIdService extends BaseService<List<Game>> {
     public List<Game> execute() {
         Team team = getBrokerFactory().getTeamBroker().findById(teamId);
         if (team == null) {
-            throw new SportstatsServiceException("Team with the given id does not exist");
+            throw new SportstatsServiceException("A team with the given id does not exist");
         }
-        return getBrokerFactory().getGameBroker().findByTeamId(teamId);
+        
+        return getBrokerFactory().getGameBroker().findHomeGamesByTeamId(teamId);
     }
+    
 }

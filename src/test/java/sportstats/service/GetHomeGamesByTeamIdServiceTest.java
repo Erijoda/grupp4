@@ -5,12 +5,13 @@
  */
 package sportstats.service;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import java.util.ArrayList;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import sportstats.domain.Game;
 import sportstats.domain.Team;
 import sportstats.domain.broker.BrokerFactory;
@@ -19,14 +20,14 @@ import sportstats.domain.broker.TeamBroker;
 
 /**
  *
- * @author davik
+ * @author Davik
  */
-public class GetGamesByTeamIdServiceTest {
+public class GetHomeGamesByTeamIdServiceTest {
     
     @Test
     public void teamIdIsNullThrowsException() {
         try {
-            new GetGamesByTeamIdService(null);
+            new GetHomeGamesByTeamIdService(null);
             fail("Should throw exception");
         } catch (SportstatsServiceException ex) {}
     }
@@ -35,7 +36,7 @@ public class GetGamesByTeamIdServiceTest {
     public void nonExistantTeamThrowsException() {
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithSettings();
         try {
-            new GetGamesByTeamIdService(0L)
+            new GetHomeGamesByTeamIdService(0L)
                     .init(brokerFactory)
                     .execute();
             fail("Should throw exception");
@@ -45,10 +46,9 @@ public class GetGamesByTeamIdServiceTest {
     @Test
     public void existingTeamReturnsListOfGame() {
         BrokerFactory brokerFactory = getMockedBrokerFactoryWithSettings();
-        
         List<Game> games = null;
         try {
-            games = new GetGamesByTeamIdService(1L)
+            games = new GetHomeGamesByTeamIdService(1L)
                     .init(brokerFactory)
                     .execute();
         } catch (SportstatsServiceException ex) {
@@ -77,10 +77,7 @@ public class GetGamesByTeamIdServiceTest {
         List<Game> mockedGames = new ArrayList<>();
         mockedGames.add(mock(Game.class));
         
-        when(gameBroker.findByTeamId(1L)).thenReturn(mockedGames);
-        when(gameBroker.findWinsByTeamId(1L)).thenReturn(mockedGames);
-        when(gameBroker.findTiesByTeamId(1L)).thenReturn(mockedGames);
-        when(gameBroker.findLossesByTeamId(1L)).thenReturn(mockedGames);
+        when(gameBroker.findHomeGamesByTeamId(1L)).thenReturn(mockedGames);
         when(teamBroker.findById(0L)).thenReturn(null);
         when(teamBroker.findById(1L)).thenReturn(mockedTeam);
         

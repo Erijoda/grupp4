@@ -13,11 +13,11 @@ import sportstats.domain.Team;
  *
  * @author davik
  */
-public class GetGamesByTeamIdService extends BaseService<List<Game>> {
+public class GetGamesWonByTeamIdService extends BaseService<List<Game>> {
 
     private final Long teamId;
 
-    public GetGamesByTeamIdService(Long teamId) {
+    public GetGamesWonByTeamIdService(Long teamId) {
         if (teamId == null) {
             throw new SportstatsServiceException("Team id should not be null");
         }
@@ -30,6 +30,6 @@ public class GetGamesByTeamIdService extends BaseService<List<Game>> {
         if (team == null) {
             throw new SportstatsServiceException("Team with the given id does not exist");
         }
-        return getBrokerFactory().getGameBroker().findByTeamId(teamId);
+        return getBrokerFactory().getGameBroker().findWinsByTeamId(teamId);
     }
 }
