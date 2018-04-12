@@ -5,6 +5,7 @@
  */
 package sportstats.domain.broker;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import sportstats.domain.Game;
@@ -66,6 +67,13 @@ public class GameBroker {
                 + "AND ((games.home_team_id=? AND results.score_home_team < results.score_away_team) "
                 + "OR (games.away_team_id=? AND results.score_home_team > results.score_away_team))";
         return GameDao.findBySQL(query, teamId, teamId).stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Game> findByDate(Date date) {
+        return GameDao.find("date=?", date)
+                .stream()
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
