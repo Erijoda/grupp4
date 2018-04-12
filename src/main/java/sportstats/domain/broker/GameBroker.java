@@ -36,6 +36,17 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
+    
+    public List<Game> findByTeamIds(Long firstTeamId, Long secondTeamId) {
+        return GameDao
+                .find("(home_team_id=? and away_team_id=?) "
+                        + "or (home_team_id=? and away_team_id=?)"
+                        , firstTeamId, secondTeamId
+                        , secondTeamId, firstTeamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
 
     public List<Game> findWinsByTeamId(Long teamId) {
         String query
