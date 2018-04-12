@@ -69,4 +69,18 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
+    
+    public List<Game> findHomeGamesByTeamId(Long teamId) {
+        return GameDao.find("home_team_id=?", teamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Game> findAwayGamesByTeamId(Long teamId) {
+        return GameDao.find("away_team_id=?", teamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
 }
