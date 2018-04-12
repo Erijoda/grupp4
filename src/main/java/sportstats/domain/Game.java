@@ -103,12 +103,19 @@ public class Game implements Base<GameDao> {
     }
     
     public void setArena(Arena arena) {
+        if (dao == null) System.out.println("NULL gameDAO");
         arena.setAsChild(dao);
     }
 
     public void setAsChild(ResultDao resultDao) {
         resultDao.setParent(dao);
     }
+    
+    public void setAsChild(ArenaDao arenaDao) {
+        arenaDao.setParent(dao);
+    }
+    
+    
     
     public void save() {
         dao.save();

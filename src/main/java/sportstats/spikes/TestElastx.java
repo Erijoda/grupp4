@@ -8,6 +8,7 @@ package sportstats.spikes;
 import java.util.UUID;
 import sportstats.service.AddSportService;
 import sportstats.service.GetAllSportsService;
+import sportstats.service.AddArenaService;
 import sportstats.service.ServiceRunner;
 
 /**
@@ -19,5 +20,11 @@ public class TestElastx {
         String random = UUID.randomUUID().toString();
         System.out.println(new ServiceRunner<>(new AddSportService(random)).execute());
         System.err.println(new ServiceRunner<>(new GetAllSportsService()).execute());
+        //System.out.println(new ServiceRunner<>(new AddArenaService("Strömvallen",1L)).execute());
+        AddArenaService addArena = new AddArenaService("Friends",1L);
+        System.out.println(new ServiceRunner<>(addArena).execute());
+       //System.out.println(new ServiceRunner<>(new AddArenaService("Strömvallen",1L)).execute());
+        
+    
     }
 }
