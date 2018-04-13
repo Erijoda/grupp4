@@ -12,6 +12,7 @@ import sportstats.service.GetGamesByRoundIdService;
 import sportstats.service.GetGamesBySeasonIdService;
 import sportstats.service.ServiceRunner;
 import sportstats.service.AddArenaService;
+import sportstats.service.AddSpectatorsService;
 
 
 /**
@@ -32,8 +33,10 @@ public class TestElastx {
 
                 .execute());
 */
-        AddArenaService addArena = new AddArenaService("Friends",2L);
-        System.out.println(new ServiceRunner<>(addArena).execute());
+        //AddArenaService addArena = new AddArenaService("Friends",2L);
+        //System.out.println(new ServiceRunner<>(addArena).execute());
+        AddSpectatorsService addSpectators = new AddSpectatorsService(500L, 2L);
+        System.out.println(new ServiceRunner<>(addSpectators).execute());
         
         }
     

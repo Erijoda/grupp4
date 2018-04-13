@@ -121,6 +121,14 @@ public class Game implements Base<GameDao> {
     public void setArena(Arena arena) {
         arena.setAsChild(dao);
     }
+    
+    public Long getSpectators() {
+        return dao.getLong("spectators");
+    }
+    
+    public void setSpectators(Long spectators) {
+        dao.setLong("spectators", spectators);
+    }
 
     public void setAsChild(ResultDao resultDao) {
         resultDao.setParent(dao);
