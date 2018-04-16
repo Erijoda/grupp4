@@ -5,6 +5,8 @@
  */
 package sportstats.rest.shapes;
 
+import java.sql.Date;
+
 /**
  *
  * @author Davik
@@ -12,6 +14,7 @@ package sportstats.rest.shapes;
 public class GameShape {
     public Long homeTeamId;
     public Long awayTeamId;
+    public Date date;
     
     public GameShape() {}
 }
