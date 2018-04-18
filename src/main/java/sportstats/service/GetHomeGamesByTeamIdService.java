@@ -18,19 +18,11 @@ public class GetHomeGamesByTeamIdService extends BaseService<List<Game>> {
     private final Long teamId;
 
     public GetHomeGamesByTeamIdService(Long teamId) {
-        if (teamId == null) {
-            throw new SportstatsServiceException("TeamId should not be null");
-        }
         this.teamId = teamId;
     }
 
     @Override
     public List<Game> execute() {
-        Team team = getBrokerFactory().getTeamBroker().findById(teamId);
-        if (team == null) {
-            throw new SportstatsServiceException("A team with the given id does not exist");
-        }
-        
         return getBrokerFactory().getGameBroker().findHomeGamesByTeamId(teamId);
     }
     

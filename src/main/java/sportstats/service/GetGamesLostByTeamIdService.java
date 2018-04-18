@@ -7,7 +7,6 @@ package sportstats.service;
 
 import java.util.List;
 import sportstats.domain.Game;
-import sportstats.domain.Team;
 
 /**
  *
@@ -18,18 +17,11 @@ public class GetGamesLostByTeamIdService extends BaseService<List<Game>> {
     private final Long teamId;
 
     public GetGamesLostByTeamIdService(Long teamId) {
-        if (teamId == null) {
-            throw new SportstatsServiceException("Team id should not be null");
-        }
         this.teamId = teamId;
     }
 
     @Override
     public List<Game> execute() {
-        Team team = getBrokerFactory().getTeamBroker().findById(teamId);
-        if (team == null) {
-            throw new SportstatsServiceException("Team with the given id does not exist");
-        }
         return getBrokerFactory().getGameBroker().findLossesByTeamId(teamId);
     }
 }
