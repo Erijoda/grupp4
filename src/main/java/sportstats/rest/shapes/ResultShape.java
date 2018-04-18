@@ -5,6 +5,8 @@
  */
 package sportstats.rest.shapes;
 
+import sportstats.constants.WinType;
+
 /**
  *
  * @author Davik
@@ -12,5 +14,7 @@ package sportstats.rest.shapes;
 public class ResultShape {
     public Long gameId;
     public Long scoreAwayTeam;
-    public long scoreHomeTeam;
+    public Long scoreHomeTeam;
+    //Optional WinType, must match enum exactly. case sensitive
+    public WinType winType;
 }

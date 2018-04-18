@@ -7,6 +7,7 @@ package sportstats.domain.dao;
 
 import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
+import sportstats.constants.WinType;
 
 
 /**
@@ -15,5 +16,11 @@ import org.javalite.activejdbc.annotations.Table;
  */
 @Table ("results")
 public class ResultDao extends Model {
+    public WinType getWinType() {
+        return WinType.valueOf(getInteger("win_type"));
+    }
     
+    public void setWinType(WinType winType) {
+        setInteger("win_type", winType.getValue());
+    }
 }
