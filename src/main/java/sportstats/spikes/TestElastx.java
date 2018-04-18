@@ -6,15 +6,7 @@
 package sportstats.spikes;
 
 import com.owlike.genson.Genson;
-import java.util.UUID;
 import sportstats.rest.shapes.ResultShape;
-import sportstats.service.AddSportService;
-import sportstats.service.GetAllSportsService;
-import sportstats.service.GetGamesByRoundIdService;
-import sportstats.service.GetGamesBySeasonIdService;
-import sportstats.service.ServiceRunner;
-import sportstats.service.AddArenaService;
-import sportstats.service.AddSpectatorsService;
 
 
 /**

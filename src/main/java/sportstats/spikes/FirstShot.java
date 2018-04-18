@@ -1,14 +1,5 @@
 package sportstats.spikes;
 
-import java.util.List;
-import sportstats.db.DbConn;
-import static sportstats.db.DbConn.*;
-//import org.javalite.activejdbc.Base;
-import sportstats.domain.Sport;
-import sportstats.domain.Team;
-import sportstats.domain.broker.BrokerFactory;
-import sportstats.domain.dao.SportDao;
-import sportstats.service.AddSportService;
 import sportstats.service.GetAllSportsService;
 import sportstats.service.ServiceRunner;
 

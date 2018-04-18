@@ -5,7 +5,6 @@
  */
 package sportstats.spikes;
 
-import static sportstats.db.DbConn.*;
 import sportstats.domain.Season;
 
 /**

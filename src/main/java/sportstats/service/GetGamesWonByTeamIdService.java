@@ -7,7 +7,6 @@ package sportstats.service;
 
 import java.util.List;
 import sportstats.domain.Game;
-import sportstats.domain.Team;
 
 /**
  *

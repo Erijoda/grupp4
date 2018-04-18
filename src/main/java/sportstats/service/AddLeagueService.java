@@ -5,8 +5,8 @@
  */
 package sportstats.service;
 
-import sportstats.domain.Sport;
 import sportstats.domain.League;
+import sportstats.domain.Sport;
 
 /**
  *

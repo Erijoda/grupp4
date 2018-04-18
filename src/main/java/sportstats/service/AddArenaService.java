@@ -5,8 +5,8 @@
  */
 package sportstats.service;
 
-import sportstats.domain.Game;
 import sportstats.domain.Arena;
+import sportstats.domain.Game;
 
 
 public class AddArenaService extends BaseService<Arena> {

@@ -6,10 +6,7 @@
 package sportstats.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import sportstats.db.DbConn;
 import sportstats.domain.Season;
-import sportstats.domain.dao.SeasonDao;
 
 
 /**

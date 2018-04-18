@@ -1,8 +1,8 @@
 package sportstats.service;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import static org.mockito.Mockito.*;
 import sportstats.domain.Sport;
 import sportstats.domain.Team;
