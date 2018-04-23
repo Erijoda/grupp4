@@ -79,8 +79,13 @@ public class Game implements Base<GameDao> {
         dao.setLong("away_team_id", team.getId());
     }
     
+    @JsonIgnore //Genson can't serialize java.sql.Date
     public Date getDate() {
         return dao.getDate("date");
+    }
+    
+    public String getGameDate() {
+        return dao.getString("date");
     }
     
     public void setDate(Date date) {
