@@ -37,7 +37,7 @@ public class ServiceRunner<T> {
         }
     }
     
-    protected T executeWithoutJson() {
+    public T executeWithoutJson() {
         DbConn dbConn = new DbConn();
         
         service.init(new BrokerFactory());

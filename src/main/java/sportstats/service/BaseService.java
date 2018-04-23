@@ -22,7 +22,7 @@ public abstract class BaseService<T> implements SportstatsService<T> {
         return this;
     }
 
-    protected BrokerFactory getBrokerFactory() {
+    public BrokerFactory getBrokerFactory() {
         return brokerFactory;
     }
 

@@ -1,6 +1,6 @@
 package sportstats.spikes;
 
-import sportstats.service.GetAllSportsService;
+import sportstats.service.sports.GetAllSportsService;
 import sportstats.service.ServiceRunner;
 
 /**
