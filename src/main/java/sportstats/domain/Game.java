@@ -6,6 +6,7 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
+import java.sql.Date;
 import sportstats.domain.broker.BrokerFactory;
 import sportstats.domain.dao.ArenaDao;
 import sportstats.domain.dao.GameDao;
@@ -78,7 +79,20 @@ public class Game implements Base<GameDao> {
         }
         dao.setLong("away_team_id", team.getId());
     }
-
+  
+    @JsonIgnore //Genson can't serialize java.sql.Date
+    public Date getDate() {
+        return dao.getDate("date");
+    }
+    
+    public String getGameDate() {
+        return dao.getString("date");
+    }
+    
+    public void setDate(Date date) {
+        dao.setDate("date", date);
+    }
+  
     @JsonIgnore //To avoid loop while serializing
     public Round getRound() {
         return Round.of(dao.parent(RoundDao.class));

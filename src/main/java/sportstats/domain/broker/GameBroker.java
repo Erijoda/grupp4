@@ -5,6 +5,7 @@
  */
 package sportstats.domain.broker;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import sportstats.domain.Game;
@@ -80,7 +81,7 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
-    
+  
     public List<Game> findHomeGamesByTeamId(Long teamId) {
         return GameDao.find("home_team_id=?", teamId)
                 .stream()
@@ -90,6 +91,13 @@ public class GameBroker {
     
     public List<Game> findAwayGamesByTeamId(Long teamId) {
         return GameDao.find("away_team_id=?", teamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Game> findByDate(Date date) {
+        return GameDao.find("date=?", date)
                 .stream()
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());

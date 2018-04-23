@@ -13,6 +13,7 @@ public class GameShape {
     public Long homeTeamId;
     public Long awayTeamId;
     public Long arenaId;
+    public String date;
     
     public GameShape() {}
 }
