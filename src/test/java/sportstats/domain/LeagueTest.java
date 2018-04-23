@@ -5,12 +5,11 @@
  */
 package sportstats.domain;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import sportstats.domain.dao.LeagueDao;
-import sportstats.domain.dao.SportDao;
 
 /**
  *

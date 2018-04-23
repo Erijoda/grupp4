@@ -5,6 +5,7 @@
  */
 package sportstats.service;
 
+import sportstats.constants.WinType;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 
@@ -16,8 +17,13 @@ public class AddResultService extends BaseService<Result> {
     private final Long gameId;
     private final Long scoreHomeTeam;
     private final Long scoreAwayTeam;
+    private final WinType winType;
     
     public AddResultService(Long gameId, Long scoreHomeTeam, Long scoreAwayTeam) {
+        this(gameId, scoreHomeTeam, scoreAwayTeam, null);
+    }
+    
+    public AddResultService(Long gameId, Long scoreHomeTeam, Long scoreAwayTeam, WinType winType) {
         if (gameId == null) {
             throw new SportstatsServiceException("GameId should not be null");
         }
@@ -30,6 +36,7 @@ public class AddResultService extends BaseService<Result> {
         this.gameId = gameId;
         this.scoreHomeTeam = scoreHomeTeam;
         this.scoreAwayTeam = scoreAwayTeam;
+        this.winType = winType == null ? WinType.NORMAL : winType; //NORMAL is default
     }
 
     @Override
@@ -38,6 +45,7 @@ public class AddResultService extends BaseService<Result> {
         
         newResult.setScoreAwayTeam(scoreAwayTeam);
         newResult.setScoreHomeTeam(scoreHomeTeam);
+        newResult.setWinType(winType);
         
         Game game = getBrokerFactory().getGameBroker().findById(gameId);
         if (game == null) {

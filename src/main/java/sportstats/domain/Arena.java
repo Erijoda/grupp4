@@ -42,4 +42,25 @@ public class Arena implements Base<ArenaDao> {
         return dao.getLongId();
     }
     
+     public String getName() {
+        return dao.getString("name");
+    }
+
+    public void setName(String name) {
+        dao.setString("name", name);
+    }
+    
+    public void setGame(Game game) {
+        game.setAsChild(dao);
+    }
+    
+    @Override
+    public String toString() {
+        return getName() + " (id: " + getId() + ")";
+    }
+    
+     public void save() {
+        dao.save();
+    }
+    
 }

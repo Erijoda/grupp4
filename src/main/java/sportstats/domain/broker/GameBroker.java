@@ -37,6 +37,17 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
+    
+    public List<Game> findByTeamIds(Long firstTeamId, Long secondTeamId) {
+        return GameDao
+                .find("(home_team_id=? and away_team_id=?) "
+                        + "or (home_team_id=? and away_team_id=?)"
+                        , firstTeamId, secondTeamId
+                        , secondTeamId, firstTeamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
 
     public List<Game> findWinsByTeamId(Long teamId) {
         String query
@@ -67,6 +78,20 @@ public class GameBroker {
                 + "AND ((games.home_team_id=? AND results.score_home_team < results.score_away_team) "
                 + "OR (games.away_team_id=? AND results.score_home_team > results.score_away_team))";
         return GameDao.findBySQL(query, teamId, teamId).stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
+  
+    public List<Game> findHomeGamesByTeamId(Long teamId) {
+        return GameDao.find("home_team_id=?", teamId)
+                .stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
+    
+    public List<Game> findAwayGamesByTeamId(Long teamId) {
+        return GameDao.find("away_team_id=?", teamId)
+                .stream()
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }

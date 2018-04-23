@@ -6,6 +6,7 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
+import sportstats.constants.WinType;
 import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.ResultDao;
 
@@ -61,6 +62,30 @@ public class Result implements Base<ResultDao> {
     
     public void setScoreHomeTeam(Long scoreHomeTeam) {
         dao.setLong("score_home_team", scoreHomeTeam);
+    }
+    
+    public WinType getWinType() {
+        return dao.getWinType();
+    }
+    
+    public void setWinType(WinType winType) {
+        dao.setWinType(winType);
+    }
+    
+    public String getResult() {
+        String normalResult =
+                String.valueOf(getScoreHomeTeam())
+                + " - "
+                + String.valueOf(getScoreAwayTeam());
+        
+        switch (getWinType()) {
+            case OVERTIME:
+                return normalResult + " OT";
+            case SHOOTOUT:
+                return normalResult + " SO";
+        }
+        
+        return normalResult;
     }
 
     public void save() {

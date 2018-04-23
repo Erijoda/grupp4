@@ -1,8 +1,6 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
-import java.util.List;
-import java.util.stream.Collectors;
 import sportstats.domain.dao.LeagueDao;
 import sportstats.domain.dao.SeasonDao;
 

@@ -55,6 +55,10 @@ public class Season implements Base<SeasonDao> {
         dao.setBoolean("summer", summer);
     }
     
+    public Long getLeagueId() {
+        return dao.getLong("league_id");
+    }
+    
     public void setLeague(League league) {
         league.setAsChild(dao);
     }

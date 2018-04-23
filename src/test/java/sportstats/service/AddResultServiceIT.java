@@ -7,8 +7,8 @@ package sportstats.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import sportstats.db.DbConn;
 import sportstats.domain.Game;
 import sportstats.domain.League;
@@ -17,9 +17,6 @@ import sportstats.domain.Round;
 import sportstats.domain.Season;
 import sportstats.domain.Sport;
 import sportstats.domain.Team;
-import sportstats.domain.broker.BrokerFactory;
-import sportstats.domain.dao.RoundDao;
-import sportstats.domain.dao.SeasonDao;
 import sportstats.rest.shapes.GameShape;
 
 /**

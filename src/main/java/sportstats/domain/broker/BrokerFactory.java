@@ -37,4 +37,10 @@ public class BrokerFactory {
     public ResultBroker getResultBroker() {
         return new ResultBroker();
     }
+    
+    public ArenaBroker getArenaBroker() {
+        return new ArenaBroker();
+    }
+    
+    
 }

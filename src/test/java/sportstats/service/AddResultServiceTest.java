@@ -6,12 +6,12 @@
 package sportstats.service;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import org.junit.Test;
 import static org.junit.Assert.*;
-import sportstats.domain.broker.BrokerFactory;
+import org.junit.Test;
 import static org.mockito.Mockito.*;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
+import sportstats.domain.broker.BrokerFactory;
 import sportstats.domain.broker.GameBroker;
 import sportstats.domain.broker.ResultBroker;
 

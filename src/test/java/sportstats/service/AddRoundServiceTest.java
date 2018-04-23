@@ -8,19 +8,19 @@ package sportstats.service;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
-import org.junit.Test;
 import static org.junit.Assert.*;
-import sportstats.domain.broker.BrokerFactory;
-import sportstats.rest.shapes.GameShape;
+import org.junit.Test;
 import static org.mockito.Mockito.*;
 import sportstats.domain.Game;
 import sportstats.domain.Round;
 import sportstats.domain.Season;
 import sportstats.domain.Team;
+import sportstats.domain.broker.BrokerFactory;
 import sportstats.domain.broker.GameBroker;
 import sportstats.domain.broker.RoundBroker;
 import sportstats.domain.broker.SeasonBroker;
 import sportstats.domain.broker.TeamBroker;
+import sportstats.rest.shapes.GameShape;
 
 /**
  *

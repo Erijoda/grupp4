@@ -10,18 +10,19 @@ import sportstats.domain.Game;
 
 /**
  *
- * @author davik
+ * @author Davik
  */
-public class GetGamesByTeamIdService extends BaseService<List<Game>> {
-
+public class GetAwayGamesByTeamIdService extends BaseService<List<Game>> {
+    
     private final Long teamId;
 
-    public GetGamesByTeamIdService(Long teamId) {
+    public GetAwayGamesByTeamIdService(Long teamId) {
         this.teamId = teamId;
     }
 
     @Override
     public List<Game> execute() {
-        return getBrokerFactory().getGameBroker().findByTeamId(teamId);
+        return getBrokerFactory().getGameBroker().findAwayGamesByTeamId(teamId);
     }
+    
 }
