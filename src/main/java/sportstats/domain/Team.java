@@ -54,11 +54,6 @@ public class Team implements Base<TeamDao> {
         dao.save();
     }
     
-    @Override
-    public String toString() {
-        return getName() + " (id: " + getId() + ")";
-    }
-    
     public void addToSeason(Season season) {
         season.addTeam(dao);
     }

@@ -6,6 +6,8 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
+import java.util.List;
+import java.util.stream.Collectors;
 import sportstats.domain.dao.RoundDao;
 import sportstats.domain.dao.SeasonDao;
 import sportstats.domain.dao.TeamDao;
@@ -63,10 +65,6 @@ public class Season implements Base<SeasonDao> {
         league.setAsChild(dao);
     }
     
-    public void save() {
-        dao.save();
-    }
-    
     public String getName() {
         return String.valueOf(getYear()) +
                 (isSummer() ? "" : " - " + (getYear() + 1));
@@ -78,5 +76,17 @@ public class Season implements Base<SeasonDao> {
     
     public void addTeam(TeamDao teamDao) {
         dao.add(teamDao);
+    }
+    
+    @JsonIgnore
+    public List<Team> getTeams() {
+        return dao.getAll(TeamDao.class)
+                .stream()
+                .map((teamDao) -> Team.of((TeamDao)teamDao))
+                .collect(Collectors.toList());
+    }
+    
+    public void save() {
+        dao.save();
     }
 }
