@@ -102,4 +102,12 @@ public class GameBroker {
                 .map(gameDao -> Game.of((GameDao) gameDao))
                 .collect(Collectors.toList());
     }
+    
+    public List<Game> findBySeasonId(Long seasonId) {
+        String query = "SELECT games.* FROM games, rounds "
+                + "WHERE games.round_id=rounds.id AND rounds.season_id=?";
+        return GameDao.findBySQL(query, seasonId).stream()
+                .map(gameDao -> Game.of((GameDao) gameDao))
+                .collect(Collectors.toList());
+    }
 }
