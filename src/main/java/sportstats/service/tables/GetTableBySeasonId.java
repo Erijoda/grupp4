@@ -50,7 +50,7 @@ public class GetTableBySeasonId extends BaseService<List<TableRow>> {
         List<TableRow> table = new ArrayList<>();
         for(Map row : result) {
             TableRow tr = new TableRow();
-            tr.setSeasonId((Integer)row.get("season_id"));
+            tr.addSeasonId((Integer)row.get("season_id"));
             tr.setTeamId((Integer)row.get("team_id"));
             tr.setTeamName((String)row.get("team_name"));
             tr.setGamesPlayed((Long)row.get("games_played"));
