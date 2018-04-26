@@ -26,25 +26,24 @@ public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
         this.seasonId = seasonId;
     }
     
-    @Override
-    public List<TableRow> execute() {
+   public List<TableRow> execute() {
         List<Map> result = Base.findAll("SELECT\n" +
 "	seasons_teams.season_id as season_id,\n" +
 "	teams.id AS team_id,\n" +
 "	teams.name AS team_name,\n" +
-"       games.round_id AS round_id,\n" +         
-"    (SELECT COUNT(games.id) FROM games, rounds WHERE games.home_team_id=teams.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_played,\n" +
-"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team)) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_won,\n" +
-"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team = results.score_home_team)) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_tied,\n" +
-"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team)) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_lost,\n" +
-"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team)) AND results.win_type > 0 AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_won_ot,\n" +
-"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team)) AND results.win_type > 0 AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_lost_ot,\n" +
-"    (SELECT SUM(results.score_home_team) FROM games, rounds, results WHERE games.home_team_id=teams.id AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals,\n" +
-"	(SELECT SUM(results.score_away_team) FROM games, rounds, results WHERE games.home_team_id=teams.id AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals_against\n" +
+"       games.round_id AS round_id,\n" +
+"    (SELECT COUNT(games.id) FROM games, rounds WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_played,\n" +
+"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team))) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_won,\n" +
+"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team = results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team = results.score_home_team))) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_tied,\n" +
+"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team))) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_lost,\n" +
+"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team))) AND results.win_type > 0 AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_won_ot,\n" +
+"    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team))) AND results.win_type > 0 AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_lost_ot,\n" +
+"    (SELECT SUM(case when games.away_team_id=teams.id then results.score_away_team else results.score_home_team end)  FROM games, rounds, results WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals,\n" +
+"	(SELECT SUM(case when games.away_team_id=teams.id then results.score_home_team else results.score_away_team end)  FROM games, rounds, results WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals_against\n" +
 "FROM\n" +
 "	teams, games, seasons_teams\n" +
 "WHERE\n" +
-"	games.home_team_id=teams.id\n" +
+"	(games.away_team_id=teams.id OR games.home_team_id=teams.id)\n" +
 "    AND team_id=seasons_teams.team_id\n" +
 "    AND seasons_teams.season_id=?\n" +
 "    AND games.round_id=?\n" +
@@ -94,5 +93,4 @@ public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
         
         return table;
     }
-    
 }

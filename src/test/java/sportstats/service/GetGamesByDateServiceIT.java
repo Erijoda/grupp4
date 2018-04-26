@@ -18,7 +18,7 @@ public class GetGamesByDateServiceIT {
         java.util.Date myDate = new java.util.Date("2018-04-12");
         java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
         //java.sql.Date date = new java.sql.Date(2018, 04, 12);
-        System.out.println(new GetGamesByDateService(sqlDate).execute());
+//        System.out.println(new GetGamesByDateService(sqlDate).execute());
     }
 
  
