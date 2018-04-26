@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class TableRow {
     private List<Integer> seasonIds = new ArrayList<>();
+    private Integer roundId;
+    
     private Integer teamId;
     private String teamName;
     private Long gamesPlayed;
@@ -33,6 +35,14 @@ public class TableRow {
 
     public void addSeasonId(Integer seasonId) {
         this.seasonIds.add(seasonId);
+    }
+    
+    public Integer getRoundId() {
+        return roundId;
+    }
+    
+    public void setRoundId(Integer roundId) {
+        this.roundId = roundId;
     }
 
     public Integer getTeamId() {
