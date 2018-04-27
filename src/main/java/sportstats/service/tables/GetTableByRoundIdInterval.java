@@ -19,10 +19,12 @@ import sportstats.service.BaseService;
  */
 public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
     private final Long seasonId;
-    private final Long roundId;
+    private final Long roundId1;
+    private final Long roundId2;
     
-    public GetTableByRoundIdInterval(Long seasonId, Long roundId) {
-        this.roundId = roundId;
+    public GetTableByRoundIdInterval(Long seasonId, Long roundId1, Long roundId2) {
+        this.roundId1 = roundId1;
+        this.roundId2 = roundId2;
         this.seasonId = seasonId;
     }
     
@@ -46,10 +48,10 @@ public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
 "	(games.away_team_id=teams.id OR games.home_team_id=teams.id)\n" +
 "    AND team_id=seasons_teams.team_id\n" +
 "    AND seasons_teams.season_id=?\n" +
-"    AND games.round_id=?\n" +
-"GROUP BY seasons_teams.season_id, teams.id\n" +
+"    AND games.round_id BETWEEN ? AND ?\n" +
+"GROUP BY seasons_teams.season_id, teams.id, games.round_id\n" +
 "HAVING games_played > 0\n" +
-"ORDER BY team_name ASC", seasonId, roundId);
+"ORDER BY round_id, team_name ASC", seasonId, roundId1, roundId2);
         
         List<TableRow> table = new ArrayList<>();
         for(Map row : result) {
