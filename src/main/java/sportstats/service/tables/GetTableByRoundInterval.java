@@ -17,14 +17,14 @@ import sportstats.service.BaseService;
  *
  * @author Rebecca
  */
-public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
+public class GetTableByRoundInterval extends BaseService<List<TableRow>> {
     private final Long seasonId;
-    private final Long roundId1;
-    private final Long roundId2;
+    private final Long round1;
+    private final Long round2;
     
-    public GetTableByRoundIdInterval(Long seasonId, Long roundId1, Long roundId2) {
-        this.roundId1 = roundId1;
-        this.roundId2 = roundId2;
+    public GetTableByRoundInterval(Long seasonId, Long round1, Long round2) {
+        this.round1 = round1;
+        this.round2 = round2;
         this.seasonId = seasonId;
     }
     
@@ -33,7 +33,7 @@ public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
 "	seasons_teams.season_id as season_id,\n" +
 "	teams.id AS team_id,\n" +
 "	teams.name AS team_name,\n" +
-"       games.round_id AS round_id,\n" +
+"       rounds.round AS round,\n" +
 "    (SELECT COUNT(games.id) FROM games, rounds WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_played,\n" +
 "    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team > results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team < results.score_home_team))) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_won,\n" +
 "    (SELECT COUNT(games.id) FROM games, results, rounds WHERE ((games.away_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team = results.score_home_team)) OR (games.home_team_id=teams.id AND (results.game_id=games.id AND results.score_away_team = results.score_home_team))) AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as games_tied,\n" +
@@ -43,21 +43,22 @@ public class GetTableByRoundIdInterval extends BaseService<List<TableRow>> {
 "    (SELECT SUM(case when games.away_team_id=teams.id then results.score_away_team else results.score_home_team end)  FROM games, rounds, results WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals,\n" +
 "	(SELECT SUM(case when games.away_team_id=teams.id then results.score_home_team else results.score_away_team end)  FROM games, rounds, results WHERE (games.away_team_id=teams.id OR games.home_team_id=teams.id) AND results.game_id=games.id AND games.round_id=rounds.id AND rounds.season_id=seasons_teams.season_id) as goals_against\n" +
 "FROM\n" +
-"	teams, games, seasons_teams\n" +
+"	teams, games, seasons_teams, rounds\n" +
 "WHERE\n" +
 "	(games.away_team_id=teams.id OR games.home_team_id=teams.id)\n" +
 "    AND team_id=seasons_teams.team_id\n" +
 "    AND seasons_teams.season_id=?\n" +
-"    AND games.round_id BETWEEN ? AND ?\n" +
-"GROUP BY seasons_teams.season_id, teams.id, games.round_id\n" +
+"    AND rounds.round BETWEEN ? AND ?\n" +
+"    AND games.round_id = rounds.id\n" +
+"GROUP BY seasons_teams.season_id, teams.id, games.round_id, rounds.round\n" +
 "HAVING games_played > 0\n" +
-"ORDER BY round_id, team_name ASC", seasonId, roundId1, roundId2);
+"ORDER BY round_id, team_name ASC", seasonId, round1, round2);
         
         List<TableRow> table = new ArrayList<>();
         for(Map row : result) {
             TableRow tr = new TableRow();
             tr.addSeasonId((Integer)row.get("season_id"));
-            tr.setRoundId((Integer)row.get("round_id"));
+            tr.setRound((Integer)row.get("round"));
             tr.setTeamId((Integer)row.get("team_id"));
             tr.setTeamName((String)row.get("team_name"));
             tr.setGamesPlayed((Long)row.get("games_played"));
