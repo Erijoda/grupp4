@@ -6,6 +6,7 @@
 package sportstats.domain;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class TableRow {
     private BigDecimal goals;
     private BigDecimal goalsAgainst;
     private Long points;
+    private String date;
 
     public List<Integer> getSeasonIds() {
         return seasonIds;
@@ -132,5 +134,11 @@ public class TableRow {
         this.points = points;
     }
     
+    public String getDate() {
+        return this.date;
+    }
     
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
