@@ -27,7 +27,6 @@ public class ServiceRunner<T> {
         service.init(new BrokerFactory());
         try {
             dbConn.open();
-            
             return new JsonOutputFormatter().createOutput(service.execute());
         } catch (Exception ex) {
             ex.printStackTrace(System.out);

@@ -2,6 +2,7 @@ package sportstats.spikes;
 
 import sportstats.service.sports.GetAllSportsService;
 import sportstats.service.ServiceRunner;
+import sportstats.service.games.GetGamesByRoundIdService;
 
 /**
  *
@@ -10,9 +11,10 @@ import sportstats.service.ServiceRunner;
 public class FirstShot {
 
     public static void main(String[] args) {
-        
-        getSports();
-        
+    /*    
+        ServiceRunner getGamesByRoundId = new ServiceRunner<>(new GetGamesByRoundIdService(1L));
+        System.out.println("Games by round id: " + getGamesByRoundId);
+    */    
         /*
         List<Sport> sportList = new GetAllSportsService().execute();
         for(int i = 0; i < sportList.size(); i++) {
@@ -20,6 +22,8 @@ public class FirstShot {
         }
         */
         
+        
+        System.out.println(new ServiceRunner(new GetAllSportsService()).execute());
         //addSport("Skidskytte");
         //new AddSportService("Skidor").execute();
         //open();
@@ -71,9 +75,6 @@ public class FirstShot {
             addSport.execute();
     }*/
     
-    public static void getSports() {
-            ServiceRunner getSports = new ServiceRunner<>(new GetAllSportsService());
-            getSports.execute();
         }
 
     /*public static void open() {
@@ -83,4 +84,4 @@ public class FirstShot {
     public static void close() {
         Base.close();
     }*/
-}
+
