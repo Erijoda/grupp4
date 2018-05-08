@@ -15,36 +15,17 @@ import java.util.List;
  * @author Davik
  */
 public class TableRow {
-    private List<Integer> seasonIds = new ArrayList<>();
-    private Integer round;
     private Integer teamId;
     private String teamName;
     private Long gamesPlayed;
-    private Long gamesWon;
-    private Long gamesTied;
-    private Long gamesLost;
-    private Long gamesWonOT;
-    private Long gamesLostOT;
+    private BigDecimal gamesWon;
+    private BigDecimal gamesTied;
+    private BigDecimal gamesLost;
+    private BigDecimal gamesWonOT;
+    private BigDecimal gamesLostOT;
     private BigDecimal goals;
     private BigDecimal goalsAgainst;
     private Long points;
-    private String date;
-
-    public List<Integer> getSeasonIds() {
-        return seasonIds;
-    }
-
-    public void addSeasonId(Integer seasonId) {
-        this.seasonIds.add(seasonId);
-    }
-    
-    public Integer getRound() {
-        return round;
-    }
-    
-    public void setRound(Integer round) {
-        this.round = round;
-    }
 
     public Integer getTeamId() {
         return teamId;
@@ -70,43 +51,43 @@ public class TableRow {
         this.gamesPlayed = gamesPlayed;
     }
 
-    public Long getGamesWon() {
+    public BigDecimal getGamesWon() {
         return gamesWon;
     }
 
-    public void setGamesWon(Long gamesWon) {
+    public void setGamesWon(BigDecimal gamesWon) {
         this.gamesWon = gamesWon;
     }
 
-    public Long getGamesTied() {
+    public BigDecimal getGamesTied() {
         return gamesTied;
     }
 
-    public void setGamesTied(Long gamesTied) {
+    public void setGamesTied(BigDecimal gamesTied) {
         this.gamesTied = gamesTied;
     }
 
-    public Long getGamesLost() {
+    public BigDecimal getGamesLost() {
         return gamesLost;
     }
 
-    public void setGamesLost(Long gamesLost) {
+    public void setGamesLost(BigDecimal gamesLost) {
         this.gamesLost = gamesLost;
     }
 
-    public Long getGamesWonOT() {
+    public BigDecimal getGamesWonOT() {
         return gamesWonOT;
     }
 
-    public void setGamesWonOT(Long gamesWonOT) {
+    public void setGamesWonOT(BigDecimal gamesWonOT) {
         this.gamesWonOT = gamesWonOT;
     }
 
-    public Long getGamesLostOT() {
+    public BigDecimal getGamesLostOT() {
         return gamesLostOT;
     }
 
-    public void setGamesLostOT(Long gamesLostOT) {
+    public void setGamesLostOT(BigDecimal gamesLostOT) {
         this.gamesLostOT = gamesLostOT;
     }
 
@@ -132,13 +113,5 @@ public class TableRow {
 
     public void setPoints(Long points) {
         this.points = points;
-    }
-    
-    public String getDate() {
-        return this.date;
-    }
-    
-    public void setDate(String date) {
-        this.date = date;
     }
 }
