@@ -48,7 +48,7 @@ public class TableSqlGenerator {
                     sql += " AND " + tf.getSqlStub();
                 }
         
-                sql += " GROUP BY seasons_teams.season_id, teams.id\n"
+                sql += " GROUP BY teams.id\n"
                 + "ORDER BY team_name ASC";
                 
                 return sql;
