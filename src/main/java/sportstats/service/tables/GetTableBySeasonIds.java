@@ -20,19 +20,19 @@ import sportstats.service.tables.filters.TableSqlGenerator;
  *
  * @author Davik
  */
-public class GetTableBySeasonId extends BaseService<List<TableRow>> {
+public class GetTableBySeasonIds extends BaseService<List<TableRow>> {
 
-    private final Long seasonId;
+    private final Long[] seasonIds;
 
-    public GetTableBySeasonId(Long seasonId) {
-        this.seasonId = seasonId;
+    public GetTableBySeasonIds(Long... seasonIds) {
+        this.seasonIds = seasonIds;
     }
 
     public List<TableRow> execute() {
         List<Map> result = Base.findAll(
                 new TableSqlGenerator(
                         GameFilter.ALL,
-                        new SeasonFilter(seasonId)
+                        new SeasonFilter(seasonIds)
                 ).generateSql());
 
         List<TableRow> table = new ArrayList<>();
