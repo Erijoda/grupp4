@@ -12,10 +12,12 @@ package sportstats.service.tables.filters;
 public class TableSqlGenerator {
 
     private final GameFilter gameFilter;
+    private final SeasonFilter seasonFilter;
     private final TableFilter[] tableFilters;
 
-    public TableSqlGenerator(GameFilter gameFilter, TableFilter... tableFilters) {
+    public TableSqlGenerator(GameFilter gameFilter, SeasonFilter seasonFilter, TableFilter... tableFilters) {
         this.gameFilter = gameFilter;
+        this.seasonFilter = seasonFilter;
         this.tableFilters = tableFilters;
     }
 
@@ -43,6 +45,7 @@ public class TableSqlGenerator {
                 + "	results ON results.game_id=games.id\n"
                 + "WHERE \n";
                 sql += gameFilter.getSqlStub();
+                sql += " AND " + seasonFilter.getSqlStub();
                 
                 for (TableFilter tf : tableFilters) {
                     sql += " AND " + tf.getSqlStub();
