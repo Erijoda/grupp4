@@ -5,7 +5,7 @@
  */
 package sportstats.rest.shapes;
 
-import sportstats.constants.WinType;
+import sportstats.domain.WinType;
 
 /**
  *

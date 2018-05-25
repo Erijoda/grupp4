@@ -6,7 +6,6 @@
 package sportstats.domain;
 
 import com.owlike.genson.annotation.JsonIgnore;
-import sportstats.constants.WinType;
 import sportstats.domain.dao.GameDao;
 import sportstats.domain.dao.ResultDao;
 

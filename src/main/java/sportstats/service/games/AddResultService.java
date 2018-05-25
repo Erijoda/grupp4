@@ -5,7 +5,7 @@
  */
 package sportstats.service.games;
 
-import sportstats.constants.WinType;
+import sportstats.domain.WinType;
 import sportstats.domain.Game;
 import sportstats.domain.Result;
 import sportstats.service.BaseService;
