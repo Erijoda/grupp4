@@ -8,7 +8,6 @@ package sportstats.domain;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
-import sportstats.constants.WinType;
 import sportstats.domain.dao.ResultDao;
 
 /**
