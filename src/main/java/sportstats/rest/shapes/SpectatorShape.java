@@ -7,14 +7,10 @@ package sportstats.rest.shapes;
 
 /**
  *
- * @author Davik
+ * @author Rebecca
  */
-public class GameShape {
-    public Long homeTeamId;
-    public Long awayTeamId;
-    public Long arenaId;
-    public String date;
-    public Long spectators;
+public class SpectatorShape {
     
-    public GameShape() {}
+    public Long spectators;
+    public Long gameId;
 }
